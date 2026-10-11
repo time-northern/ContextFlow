@@ -41,6 +41,8 @@ class Checkpoint:
     dir: str
     # Optional: Override inference dtype (e.g., "float32", "bfloat16"). Defaults to bfloat16 if not specified.
     inference_dtype: str | None = None
+    # Read the prepared dataset without synchronizing it from the Hugging Face Hub.
+    local_files_only: bool = False
 
 
 @dataclasses.dataclass
@@ -103,6 +105,14 @@ def create_policy_from_checkpoint(
     loader: LoaderMode = LoaderMode.AUTO,
 ) -> _policy.Policy:
     train_config = _config.get_config(checkpoint.config)
+    if checkpoint.local_files_only:
+        data_config = dataclasses.replace(
+            train_config.data,
+            base_config=dataclasses.replace(
+                train_config.data.base_config or _config.DataConfig(), local_files_only=True
+            ),
+        )
+        train_config = dataclasses.replace(train_config, data=data_config)
     use_incontext = loader == LoaderMode.INCONTEXT or (loader == LoaderMode.AUTO and _is_incontext_config(train_config))
 
     if use_incontext:

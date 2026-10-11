@@ -63,7 +63,7 @@ class Args:
     #################################################################################################################
     # Utils
     #################################################################################################################
-    video_out_path: str = "data/libero_incontext/videos"  # Path to save videos
+    video_out_path: str = "output/libero_incontext/videos"  # Path to save videos
     results_out_path: str = ""  # Path to save JSON results (default: logs/eval_results/<task_suite_name>_results.json)
 
     seed: int = 7  # Random Seed (for reproducibility)
@@ -223,6 +223,9 @@ def eval_libero(args: Args) -> None:
             logging.info(f"Success: {done}")
             logging.info(f"# episodes completed so far: {total_episodes}")
             logging.info(f"# successes: {total_successes} ({total_successes / total_episodes * 100:.1f}%)")
+
+        # Release EGL resources before the interpreter terminates the display.
+        env.close()
 
         # Track per-task results using task_description as key
         per_task_episodes[task_description] = task_episodes

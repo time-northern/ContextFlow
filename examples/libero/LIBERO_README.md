@@ -82,7 +82,7 @@ for suite in libero_spatial libero_object; do
         examples/libero/main_incontext.py \
         --task-suite-name "$suite" --num-trials-per-task 50 \
         --results-out-path "logs/eval_results/unseen/${suite}.json" \
-        --video-out-path "data/libero_incontext/videos/unseen/${suite}"
+        --video-out-path "output/libero_incontext/videos/unseen/${suite}"
 done
 ```
 

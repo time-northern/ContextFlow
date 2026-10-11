@@ -7,6 +7,10 @@ assets/
 metadata/
 checkpoints/
 checkpoints
+# Machine-local resource directories and symlinks.
+/datasets
+/output
+/outputs
 nohup.out
 data/
 wandb/
@@ -156,6 +160,9 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
+!.env.example
+!.env.sample
 .venv
 env/
 venv/

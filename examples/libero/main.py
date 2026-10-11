@@ -41,7 +41,7 @@ class Args:
     #################################################################################################################
     # Utils
     #################################################################################################################
-    video_out_path: str = "data/libero/videos"  # Path to save videos
+    video_out_path: str = "output/libero/videos"  # Path to save videos
     results_out_path: str = ""  # Path to save JSON results (default: logs/eval_results/<task_suite_name>_results.json)
 
     seed: int = 7  # Random Seed (for reproducibility)
