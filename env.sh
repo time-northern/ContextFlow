@@ -2,8 +2,8 @@
 # Environment settings for this cloud host; does not modify Conda base.
 export CONTEXTFLOW_ROOT="/root/ContextFlow"
 export CONTEXTFLOW_STORAGE_ROOT="/context-flow-storage/contextflow"
-if ! mountpoint -q /context-flow-storage; then
-    echo 'ContextFlow 文件存储未挂载：/context-flow-storage' >&2
+if ! mountpoint -q "$CONTEXTFLOW_STORAGE_ROOT"; then
+    echo "ContextFlow 文件存储未挂载：$CONTEXTFLOW_STORAGE_ROOT" >&2
     return 1 2>/dev/null || exit 1
 fi
 export UV_CACHE_DIR="/app/contextflow/uv-cache"
